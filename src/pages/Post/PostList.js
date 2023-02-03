@@ -22,8 +22,30 @@ const getAllPosts = async () => {
   }
 };
 
+const getOnePost = async (post_id) => {
+  try {
+    const response = await axios.get(`API_URL/${post_id}/`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 function PostList() {
   const [postsData, setPosts] = useState([]);
+  const [selectedPost, setSelectedPost] = useState({
+    title: "",
+    user: "",
+    image: "",
+    description: "",
+    condition: "",
+    location: "",
+    date: "",
+    likes: "",
+    reserved: "",
+    category: "",
+  });
 
   const refreshPosts = async () => {
     try {
@@ -37,6 +59,25 @@ function PostList() {
     refreshPosts();
   }, []);
 
+  const selectPost = (post) => {
+    setSelectedPost(post);
+  };
+
+  const postElements = postsData.map((post) => {
+    return (
+      <li>
+        {/* <PostListItem post={post} onPostSelect={selectPost}></PostListItem> */}
+      </li>
+    );
+  });
+
+  // const boardsElements = boardsData.map((board) => {
+  //   return (
+  //     <li>
+  //       <Board board={board} onBoardSelect={selectBoard}></Board>
+  //     </li>
+  //   );
+  // });
   //   const posts = props.posts.map((post) => {
   //     return (
   //       <ul className="PostTitles">
@@ -95,6 +136,7 @@ function PostList() {
     <>
       <section className="section">
         <PostListItem posts={postsData} />
+        <p>{postElements}</p>
         {/* <h2>PostList</h2> */}
         <Outlet />
       </section>
