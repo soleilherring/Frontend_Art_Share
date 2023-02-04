@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams, Link } from "react-router-dom";
 // import PropTypes from "prop-types";
 // import "./Board.css";
 // import * as React from "react";
@@ -14,87 +15,45 @@ import React from "react";
 //   maxWidth: "100%",
 //   maxHeight: "100%",
 // });
-const PostDetails = (props) => {
-  //   return (
-  //     <Paper
-  //       sx={{
-  //         p: 2,
-  //         margin: "auto",
-  //         maxWidth: 500,
-  //         flexGrow: 1,
-  //         backgroundColor: (theme) =>
-  //           theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  //       }}
-  //     >
-  //       <Grid container spacing={2}>
-  //         <Grid item>
-  //           <ButtonBase sx={{ width: 128, height: 128 }} href=":post_id">
-  //             <Img
-  //               alt="complex"
-  //               src="https://res.cloudinary.com/dyzttpr3i/image/upload/v1/media/images/paints_yyuwsq"
-  //             />
-  //           </ButtonBase>
-  //         </Grid>
-  //         <Grid item xs={12} sm container>
-  //           <Grid item xs container direction="column" spacing={2}>
-  //             <Grid item xs>
-  //               <Typography gutterBottom variant="subtitle1" component="div">
-  //                 {props.title}
-  //               </Typography>
-  //               <Typography variant="body2" gutterBottom>
-  //                 {props.description}
-  //               </Typography>
-  //               <Typography variant="body2" color="text.secondary">
-  //                 Pick up in {props.location}
-  //               </Typography>
-  //             </Grid>
-  //             <Grid item>
-  //               <Typography sx={{ cursor: "pointer" }} variant="body2">
-  //                 <span className="Likes-Container">
-  //                   {/* <p
-  //                     className="Likes-Info-heart"
-  //                     onClick={() => {
-  //                       props.onLikeCard(props);
-  //                     }}
-  //                   > */}
-  //                   💜
-  //                   {/* </p>
-  //                   <p className="Likes-Info"> Likes: {props.likes}</p> */}
-  //                 </span>
-  //               </Typography>
-  //             </Grid>
-  //           </Grid>
-  //           <Grid item>
-  //             <Typography variant="subtitle1" component="div"></Typography>
-  //           </Grid>
-  //         </Grid>
-  //       </Grid>
-  //     </Paper>
-  //   );
-  // };
-  //     <li key={props.id}>
-  //       <h3>Title: {props.title}</h3>
-  //       <h3>Images:{props.images}</h3>
-  //       <h3>Description: {props.description}</h3>
-  //       <h3>Location : {props.location}</h3>
-  //       <h3>Likes: {props.likes}</h3>
-  //       {/* <h3></h3>condition={post.condition}
-  //       <h3></h3>location={post.location}
-  //       <h3></h3>date={post.date}
-  //       <h3></h3>likes={post.likes}
-  //       <h3></h3>reserved={post.reserved}
-  //       <h3></h3>category={post.category} */}
-  //     </li>
-  //   );
-  //   // {/* <h2>PostDetails</h2> */})
-};
-
-// PostDetails.propTypes = {
-//   id: PropTypes.number.isRequired,
-//   owner: PropTypes.string.isRequired,
-//   title: PropTypes.string.isRequired,
-//   onClickBoard: PropTypes.func,
-//   selectedBoard: PropTypes.object,
-// };
-
-export default PostDetails;
+export default function PostDetails({ posts }) {
+  const { id } = useParams();
+  const images = posts.images;
+  const firstImage = images?.length ? images[0] : {};
+  console.log(id);
+  const post = posts.find((post) => post.id.toString() === id);
+  console.log(post);
+  return (
+    <main className="PostPage">
+      <article className="post">
+        {post && (
+          <>
+            <h2>{post.title}</h2>
+            <p className="postDate">{post.date}</p>
+            <p className="postBody">{post.title}</p>
+            <p
+              className="postImage"
+              src={
+                firstImage?.image ??
+                "https://res.cloudinary.com/dyzttpr3i/image/upload/v1/media/images/pencil_rhtkx2"
+              }
+            ></p>
+            <Link to={`/edit/${post.id}`}>
+              <button className="editButton">Edit Post</button>
+            </Link>
+            {/* <button className="deleteButton" onClick={() => handleDelete(post.id)}> */}
+            Delete Post
+          </>
+        )}
+        {!post && (
+          <>
+            <h2>Post Not Found</h2>
+            <p>Well, that's disappointing.</p>
+            <p>
+              <Link to="/">Visit Our Homepage</Link>
+            </p>
+          </>
+        )}
+      </article>
+    </main>
+  );
+}

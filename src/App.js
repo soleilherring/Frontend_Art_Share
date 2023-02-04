@@ -31,7 +31,15 @@ function App() {
   //     console.log(response.data);
   //   });
   // }, []);
-
+  const getAllUsers = async () => {
+    try {
+      const response = await axios.get(`${API_URL}users/`);
+      console.log("this is user data", response.data);
+      setUsers(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const refreshPosts = async () => {
     try {
       const posts = await getAllPosts();
@@ -73,7 +81,7 @@ function App() {
     for (const post of postsData) {
       console.log(post.id);
       if (post.id === id) {
-        console.log(post.id);
+        console.log("this is the post id", post.id);
         setSelectedPost(post);
       }
     }
@@ -129,6 +137,7 @@ function App() {
           path="posts/:id"
           element={
             <PostDetails
+              posts={postsData}
               selectedPost={selectedPost}
               onClickPost={clickToSelectPost}
             />
