@@ -5,43 +5,29 @@ import { useParams, Link } from "react-router-dom";
 // import * as React from "react";
 // import { styled } from "@mui/material/styles";
 // import Grid from "@mui/material/Grid";
-// import Paper from "@mui/material/Paper";
-// import Typography from "@mui/material/Typography";
-// import ButtonBase from "@mui/material/ButtonBase";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Paper";
+import Carousel from "react-material-ui-carousel";
 
-// const Img = styled("img")({
-//   margin: "auto",
-//   display: "block",
-//   maxWidth: "100%",
-//   maxHeight: "100%",
-// });
 export default function PostDetails({ posts }) {
   const { id } = useParams();
-  const images = posts.images;
-  const firstImage = images?.length ? images[0] : {};
-  console.log(id);
+  // const images = posts.images;
+  // const firstImage = images?.length ? images[0] : {};
   const post = posts.find((post) => post.id.toString() === id);
-  console.log(post);
+  console.log("it's a post", post);
   return (
     <main className="PostPage">
       <article className="post">
         {post && (
           <>
-            <h2>{post.title}</h2>
-            <p className="postDate">{post.date}</p>
-            <p className="postBody">{post.title}</p>
-            <p
-              className="postImage"
-              src={
-                firstImage?.image ??
-                "https://res.cloudinary.com/dyzttpr3i/image/upload/v1/media/images/pencil_rhtkx2"
-              }
-            ></p>
-            <Link to={`/edit/${post.id}`}>
-              <button className="editButton">Edit Post</button>
-            </Link>
-            {/* <button className="deleteButton" onClick={() => handleDelete(post.id)}> */}
-            Delete Post
+            <div className="img_carousel">
+              <Carousel>
+                {post.images.map((item) => (
+                  <img src={item.image} alt="" />
+                ))}
+              </Carousel>
+              <h3>{post.title}</h3>
+            </div>
           </>
         )}
         {!post && (
