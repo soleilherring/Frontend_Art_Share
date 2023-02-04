@@ -22,7 +22,7 @@ export default function PostList(props) {
           id={post.id}
           title={post.title}
           user={post.user}
-          image={post.image}
+          images={post.images}
           description={post.description}
           condition={post.condition}
           location={post.location}
@@ -30,6 +30,7 @@ export default function PostList(props) {
           likes={post.likes}
           reserved={post.reserved}
           category={post.category}
+          onClickPost={props.onClickPost}
         />
       </ul>
     );

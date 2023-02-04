@@ -51,7 +51,7 @@ function App() {
     id: null,
     title: "",
     user: "",
-    image: [],
+    images: [],
     description: "",
     condition: "",
     location: "",

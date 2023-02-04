@@ -19,11 +19,29 @@ import React from "react";
 // import ButtonBase from "@mui/material/ButtonBase";
 
 export default function PostList(props) {
+  const images = props.images;
+  console.log(props);
+  // ? is optional chaining
+  const firstImage = images?.length ? images[0] : {};
+
   return (
     <div>
       {" "}
       {props.title}
-      {/* {props.image[0]} */}
+      {props.description}
+      {props.location}
+      {props.likes}
+      <button
+        onClick={() => {
+          props.onClickPost(props.id);
+        }}
+      >
+        Details{" "}
+      </button>
+      {/* look into ?? nullish coalesce */}
+      <img alt="image of item" src={firstImage?.image ?? ""} />
     </div>
   );
 }
+// react router dom link or useNavigation hook, then call url
+// link with page fragment ~link to and get id to naviaget to details, may have to use context or loader(not props, using context)
