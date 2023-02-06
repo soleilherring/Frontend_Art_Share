@@ -78,21 +78,27 @@ export default function PostListItem(props) {
                   {props.title}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  {props.description}
+                  {props.condition}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {props.user}
+                  by: {props.user.name}
                 </Typography>
               </Grid>
               <Grid item>
                 <Typography sx={{ cursor: "pointer" }} variant="body2">
                   {props.location}
                 </Typography>
+                <Typography sx={{ cursor: "pointer" }} variant="body2">
+                  {props.date}
+                  {/* {props.date().toLocaleDateString()} */}
+                </Typography>
               </Grid>
             </Grid>
             <Grid item>
               <Typography variant="subtitle1" component="div">
-                <Link to={`${props.id}`}>Get Supply</Link>
+                <Link to={`${props.id}`}>More</Link>
+                {/* <Link to={$props.id} onClick={props.onClickPost()}></Link>
+                <Link to="/" onClick={() => prop.onclick()}></Link> */}
               </Typography>
             </Grid>
           </Grid>

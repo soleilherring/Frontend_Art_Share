@@ -1,0 +1,10 @@
+.post {
+  height: 100vh;
+  width: auto;
+}
+
+.inner_img {
+  height: 300px;
+  width: auto;
+  object-fit: contain;
+}

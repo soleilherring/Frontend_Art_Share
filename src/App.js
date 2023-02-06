@@ -9,8 +9,9 @@ import Home from "./pages/HomePage/Home";
 import Error from "./pages/Error";
 import Chat from "./pages/HomePage/Chat";
 import SignUp from "./components/SignupForm";
-import PostForm from "./components/SignupForm";
+import PostForm from "./pages/Post/PostForm";
 import axios from "axios";
+import "bootswatch/dist/minty/bootstrap.min.css";
 
 const API_URL = "http://localhost:8000/api/";
 
@@ -73,6 +74,10 @@ function App() {
     refreshPosts();
   }, []);
 
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
   // make function that takes selected post based on id passed to it and will navigate to postdetail
   // onclick to find post, setselected post, then it will redirect to post detail.
   // post list, iterate through post list item, which click on post item component, store id in state --> navigate
@@ -118,14 +123,27 @@ function App() {
         alert("Something went wrong");
       });
   };
-
+  // add a post to the post list
+  const handleAddPost = (newPost) => {
+    axios
+      .post(`${API_URL}posts/`, newPost)
+      .then((response) => {
+        const newPostList = [...postsData];
+        newPostList.push(response.data);
+        setPosts(newPostList);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+        alert("Couldn't create a new post. Try again!");
+      });
+  };
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="signin" element={<SignIn />} />
-        <Route path="signup" element={<SignUp />} /> */}
-        {/* <Route path="*" element={<Error />} /> */}
+        {/* <Route path="signin" element={<SignIn users={usersData} />} /> */}
+        {/* <Route path="signup" element={<SignUp />} />  */}
+        <Route path="*" element={<Error />} />
         <Route
           path="posts"
           element={
@@ -143,7 +161,10 @@ function App() {
             />
           }
         />
-        {/* <Route path="postform" element={<PostForm />} /> */}
+        <Route
+          path="postform"
+          element={<PostForm onAddPost={handleAddPost} />}
+        />
       </Routes>
     </BrowserRouter>
   );

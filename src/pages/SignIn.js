@@ -1,17 +1,3 @@
-// import { Link } from "react-router-dom";
-// const SignupForm = () => {
-//   return (
-//     <section className="home">
-//       <h2>Signup</h2>
-//       <Link to="/" className="btn">
-//         Home
-//       </Link>
-//     </section>
-//   );
-// };
-
-// export default SignupForm;
-
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -26,6 +12,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useState, useRef, useEffect } from "react";
 
 function Copyright(props) {
   return (
@@ -48,6 +35,22 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const userRef = useRef();
+  const errRef = useRef();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [location, setLocation] = useState("");
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
+
+  // useEffect(() => {
+  //   setErrMsg("");
+  // }, [name, password]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
