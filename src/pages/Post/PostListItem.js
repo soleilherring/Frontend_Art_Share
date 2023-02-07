@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, redirect } from "react-router-dom";
+import { Link, Outlet, redirect } from "react-router-dom";
 
 // $$$$$$$$$$$$$$$$ working version $$$$$$$$$$$$
 
@@ -96,7 +96,12 @@ export default function PostListItem(props) {
             </Grid>
             <Grid item>
               <Typography variant="subtitle1" component="div">
-                <Link to={`${props.id}`}>More</Link>
+                <Link className="btn" to={`${props.id}`}>
+                  More
+                </Link>
+                <Link className="btn" to={`${props.id}`}>
+                  Reserved
+                </Link>
                 {/* <Link to={$props.id} onClick={props.onClickPost()}></Link>
                 <Link to="/" onClick={() => prop.onclick()}></Link> */}
               </Typography>

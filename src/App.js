@@ -1,15 +1,18 @@
 import "./App.css";
 import React from "react";
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import PostList from "./pages/Post/PostList";
 import SignIn from "./pages/SignIn";
 import PostDetails from "./pages/Post/PostDetails";
 import Home from "./pages/HomePage/Home";
 import Error from "./pages/Error";
-import Chat from "./pages/HomePage/Chat";
-import SignUp from "./components/SignupForm";
+// import Chat from "./pages/HomePage/Chat";
+import SignupForm from "./components/SignupForm";
 import PostForm from "./pages/Post/PostForm";
+import SharedLayout from "./pages/SharedLayout";
+// import SharedPostsLayout from "./pages/Post/SharedPostsLayout";
+
 import axios from "axios";
 import "bootswatch/dist/minty/bootstrap.min.css";
 
@@ -140,31 +143,28 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        {/* <Route path="signin" element={<SignIn users={usersData} />} /> */}
-        {/* <Route path="signup" element={<SignUp />} />  */}
-        <Route path="*" element={<Error />} />
-        <Route
-          path="posts"
-          element={
-            <PostList posts={postsData} onClickPost={clickToSelectPost} />
-          }
-        />
-        {/* <Route path="chat" element={<Chat />} /> */}
-        <Route
-          path="posts/:id"
-          element={
-            <PostDetails
-              posts={postsData}
-              selectedPost={selectedPost}
-              onClickPost={clickToSelectPost}
-            />
-          }
-        />
-        <Route
-          path="postform"
-          element={<PostForm onAddPost={handleAddPost} />}
-        />
+        <Route path="/" element={<Home />}>
+          {/* <Route index element={<Home />} />  */}
+          <Route path="signin" element={<SignIn users={usersData} />} />
+          <Route path="signupform" element={<SignupForm />} />
+          <Route path="*" element={<Error />} />
+          <Route
+            path="posts"
+            element={
+              <PostList posts={postsData} onClickPost={clickToSelectPost} />
+            }
+          />
+          <Route
+            path="posts/:id"
+            element={
+              <PostDetails posts={postsData} onHandleUpdate={handleUpdate} />
+            }
+          />
+          <Route
+            path="postform"
+            element={<PostForm users={usersData} onAddPost={handleAddPost} />}
+          />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

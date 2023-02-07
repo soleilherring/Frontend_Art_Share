@@ -4,7 +4,7 @@ const Error = () => {
     <section className="section">
       <h2>404 </h2>
       <h2>Page not found</h2>
-      <Link to="/">Home</Link>
+      <Link to="/posts">Home</Link>
     </section>
   );
 };

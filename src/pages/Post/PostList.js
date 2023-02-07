@@ -31,15 +31,19 @@ export default function PostList(props) {
           reserved={post.reserved}
           category={post.category}
           onClickPost={props.onClickPost}
+          onHandleUpdate={props.onHandleUpdate}
         />
       </ul>
     );
   });
   return (
-    <div className="App">
-      <h3 className="PostHeading">All:</h3>
-      <ul className="Posts-Box">{posts}</ul>
-    </div>
+    <>
+      {/* <Navbar /> */}
+      <div className="App">
+        <ul className="Posts-Box">{posts}</ul>
+        {/* <Outlet /> */}
+      </div>
+    </>
   );
 }
 
@@ -48,7 +52,7 @@ export default function PostList(props) {
 //     <section className="section">
 //       <PostListItem posts={posts} />
 //       {/* <ul className="posts_list">{postElements}</ul> */}
-//       <Outlet />
+//
 //     </section>
 //     <Navbar />
 //   </>

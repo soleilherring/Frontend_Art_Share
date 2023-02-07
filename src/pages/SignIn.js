@@ -8,11 +8,10 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockIcon from "@mui/icons-material/Lock";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState, useRef, useEffect } from "react";
 
 function Copyright(props) {
   return (
@@ -24,7 +23,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Art Share
+        Your Website
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -35,22 +34,6 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-  const userRef = useRef();
-  const errRef = useRef();
-
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [location, setLocation] = useState("");
-
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
-
-  // useEffect(() => {
-  //   setErrMsg("");
-  // }, [name, password]);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -73,7 +56,7 @@ export default function SignIn() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockIcon />
+            <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
@@ -123,7 +106,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link href="signupform" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

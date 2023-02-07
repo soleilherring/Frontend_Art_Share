@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import "./PostForm.css";
 
 const PostForm = (props) => {
   // const [postFormFields, setPostFormFields] = useState({
@@ -164,7 +165,10 @@ const PostForm = (props) => {
           {Array.from(images).map((item) => {
             return (
               <span>
-                <img src={item ? URL.createObjectURL(item) : null} />
+                <img
+                  height={300}
+                  src={item ? URL.createObjectURL(item) : null}
+                />
               </span>
             );
           })}
