@@ -20,7 +20,7 @@ const PostForm = (props) => {
   const [images, setImages] = useState([]);
   // console.log(images);
   const [title, setTitle] = useState("");
-  const [user, setUser] = useState(1);
+  const [user, setUser] = useState(props.usersID);
   const [description, setDescription] = useState("");
   const [condition, setCondition] = useState("");
   const [location, setLocation] = useState("");
@@ -89,8 +89,8 @@ const PostForm = (props) => {
             }}
             type="text"
             class="form-control"
-            id="location"
-            placeholder="Location"
+            id="title"
+            placeholder="Title"
             value={title}
           />
           <label for="exampleInputEmail1" class="form-label mt-4">

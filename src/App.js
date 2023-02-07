@@ -55,6 +55,7 @@ function App() {
   };
 
   const [usersData, setUsers] = useState([]);
+  const [usersID, setUserID] = useState([]);
   const [reviewsData, setReviews] = useState([]);
   const [categoriesData, setCategories] = useState([]);
   const [locations, setLocations] = useState([]);
@@ -93,6 +94,11 @@ function App() {
         setSelectedPost(post);
       }
     }
+  };
+
+  // user ID
+  const clickToGetUserID = (id) => {
+    setUserID(id);
   };
 
   const handleDelete = (id) => {
@@ -146,7 +152,10 @@ function App() {
         <Route path="/" element={<Home />}>
           {/* <Route index element={<Home />} />  */}
           <Route path="signin" element={<SignIn users={usersData} />} />
-          <Route path="signupform" element={<SignupForm />} />
+          <Route
+            path="signupform"
+            element={<SignupForm onUpdateUserID={clickToGetUserID} />}
+          />
           <Route path="*" element={<Error />} />
           <Route
             path="posts"
@@ -162,7 +171,13 @@ function App() {
           />
           <Route
             path="postform"
-            element={<PostForm users={usersData} onAddPost={handleAddPost} />}
+            element={
+              <PostForm
+                usersID={usersID}
+                users={usersData}
+                onAddPost={handleAddPost}
+              />
+            }
           />
         </Route>
       </Routes>

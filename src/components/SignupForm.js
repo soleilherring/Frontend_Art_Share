@@ -12,6 +12,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import API_URL from "../constants/index";
+import axios from "axios";
+import { useState } from "react";
 
 function Copyright(props) {
   return (
@@ -33,14 +36,30 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUpForm() {
+export default function SignUpForm(props) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [location, setLocation] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("location", location);
+
+    axios
+      .post("http://localhost:8000/api/users/", formData)
+      .then((response) => {
+        props.onUpdateUserID(response.data.id);
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -70,12 +89,16 @@ export default function SignUpForm() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                  value={name}
                   autoComplete="given-name"
-                  name="firstName"
+                  name="Name"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="Name"
+                  label="Name"
                   autoFocus
                 />
               </Grid>
@@ -83,16 +106,24 @@ export default function SignUpForm() {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  onChange={(e) => {
+                    setLocation(e.target.value);
+                  }}
+                  value={location}
+                  id="location"
+                  label="location"
+                  name="location"
+                  autoComplete="location"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                  value={email}
                   id="email"
                   label="Email Address"
                   name="email"
@@ -103,6 +134,10 @@ export default function SignUpForm() {
                 <TextField
                   required
                   fullWidth
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                  value={password}
                   name="password"
                   label="Password"
                   type="password"
