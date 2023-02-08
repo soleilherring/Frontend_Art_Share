@@ -52,7 +52,7 @@ export default function SignUpForm(props) {
     formData.append("location", location);
 
     axios
-      .post("http://localhost:8000/api/users/", formData)
+      .post(`http://localhost:8000/api/users/`, formData)
       .then((response) => {
         props.onUpdateUserID(response.data.id);
         console.log(response);

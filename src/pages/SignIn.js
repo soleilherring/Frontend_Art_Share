@@ -12,6 +12,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
+import { useState, useRef, useContext, useEffect } from "react";
+import AuthContext from "../context/AuthProvider";
 
 function Copyright(props) {
   return (
@@ -34,13 +37,23 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const { setUser } = useContext(AuthContext);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    axios
+      .post(`http://localhost:8000/api/users/signin/`, { email, password })
+      .then((response) => {
+        setUser(response.data.id);
+        console.log(response.data.id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -71,6 +84,10 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              value={email}
               id="email"
               label="Email Address"
               name="email"
@@ -81,6 +98,10 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              value={password}
               name="password"
               label="Password"
               type="password"

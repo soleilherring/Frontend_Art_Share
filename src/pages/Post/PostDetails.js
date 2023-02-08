@@ -20,32 +20,26 @@ export default function PostDetails({ posts }) {
     <main className="PostPage">
       <article className="post">
         {post && (
-          <>
-            <div className="img_carousel">
-              <div class="card">
-                <div class="card-body">
-                  <Carousel className="inner_img">
-                    {post.images.map((item) => (
-                      <img src={item.image} alt="" className="inner_img" />
-                    ))}
-                  </Carousel>
-                  <h4 class="card-title">{post.title}</h4>
-                  <h6 class="card-subtitle mb-2 text-muted">
-                    {post.user.name}
-                  </h6>
-                  <p class="card-text">{post.description}</p>
-                  <a href="#" class="card-link">
-                    Message
-                  </a>
-                  <a href="#" class="card-link">
-                    Likes
-                  </a>
-                </div>
-              </div>
+          <div class="card">
+            <div class="card-body">
+              <Carousel className="inner_img">
+                {post.images.map((item) => (
+                  <img src={item.image} alt="" className="inner_img" />
+                ))}
+              </Carousel>
+              <h4 class="card-title">{post.title}</h4>
+              <h6 class="card-subtitle mb-2 text-muted">{post.user.name}</h6>
+              <p class="card-text">{post.description}</p>
+              <a href="#" class="card-link">
+                Message
+              </a>
+              <a href="#" class="card-link">
+                Likes
+              </a>
             </div>
-          </>
+          </div>
         )}
-        {!post && (
+        {!post && posts.length !== 0 && (
           <>
             <h2>Post Not Found</h2>
             <p>Well, that's disappointing.</p>

@@ -2,14 +2,18 @@
   display: flex;
   justify-content: center;
   height: 300vh;
-  width: 500px;
+  /* width: 500px; */
 }
 
 .inner_img {
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   height: 300px;
-  width: auto;
+  /* width: auto; */
+}
+
+.card {
+  width: 100%;
 }
 
 .card-body {
