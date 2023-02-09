@@ -74,17 +74,16 @@ export default function SignIn() {
       .post(`http://localhost:8000/api/login/`, user)
       .then((response) => {
         console.log(response.data);
-        window.localStorage.setItem(
-          "user",
-          JSON.stringify({ ...response.data })
-        );
+        // window.localStorage.setItem(
+        //   "user",
+        //   JSON.stringify()
+        // );
+        auth.login({ ...response.data });
+        // const loggedInUser = JSON.parse(window.localStorage.getItem("user"));
       })
       .catch((error) => console.log(error));
 
     // const loggedInUser = getItemFromLocalStorage("user");
-    auth.login(user);
-    // const loggedInUser = JSON.parse(window.localStorage.getItem("user"));
-    navigate("/posts", { replace: true });
   };
 
   return (

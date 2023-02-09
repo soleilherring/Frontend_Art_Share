@@ -26,9 +26,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (data) => {
-    setItemInLocalStorage("user");
+    setItemInLocalStorage("user", data);
     setUser(data);
-    navigate("posts");
+    navigate("posts", { replace: true });
   };
 
   // call this function to sign out logged in user

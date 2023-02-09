@@ -8,6 +8,7 @@ const Dashboard = () => {
   //   auth.logout();
   //   navigate("/");
   // };
+
   return (
     <section className="section">
       <h4>{auth.user ? `Welcome, ${auth.user.name}` : ""}</h4>

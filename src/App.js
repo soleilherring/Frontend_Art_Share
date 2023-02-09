@@ -12,7 +12,7 @@ import SignupForm from "./components/SignupForm";
 import PostForm from "./pages/Post/PostForm";
 import SharedLayout from "./pages/SharedLayout";
 import Dashboard from "./pages/Dashboard";
-// import { RequireAuth } from "./components/RequireAuth";
+import { RequireAuth } from "./components/RequireAuth";
 // import SharedPostsLayout from "./pages/Post/SharedPostsLayout";
 
 import axios from "axios";
@@ -177,27 +177,27 @@ function App() {
                 <SignIn onUpdateUserID={clickToGetUserID} usersID={usersID} />
               }
             />
-            {/* <Route element={<RequireAuth />}> */}
-            <Route
-              path="dashboard"
-              element={
-                <Dashboard
-                  onUpdateUserID={clickToGetUserID}
-                  usersID={usersID}
-                />
-              }
-            />
-            <Route
-              path="postform"
-              element={
-                <PostForm
-                  usersID={usersID}
-                  users={usersData}
-                  // onAddPost={handleAddPost}
-                />
-              }
-            />
-            {/* </Route> */}
+            <Route element={<RequireAuth />}>
+              <Route
+                path="dashboard"
+                element={
+                  <Dashboard
+                    onUpdateUserID={clickToGetUserID}
+                    usersID={usersID}
+                  />
+                }
+              />
+              <Route
+                path="postform"
+                element={
+                  <PostForm
+                    usersID={usersID}
+                    users={usersData}
+                    // onAddPost={handleAddPost}
+                  />
+                }
+              />
+            </Route>
           </Route>
         </Routes>
       </AuthProvider>
