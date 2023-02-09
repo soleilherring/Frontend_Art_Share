@@ -14,7 +14,11 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useState, useRef, useContext, useEffect } from "react";
-import AuthContext from "../context/AuthProvider";
+import AuthContext from "../context/useAuth";
+import { useAuth } from "../context/useAuth";
+import { setItemInLocalStorage } from "../useLocalStorage";
+import { getItemFromLocalStorage } from "../useLocalStorage";
+import { useNavigate, useRoutes } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -36,24 +40,57 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+// export default function SignIn(props) {
+// const { setUser } = useContext(AuthContext);
+// const { login } = useAuth();
 export default function SignIn() {
-  const { setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [input, setInput] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const changeInput = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const user = {
+      email: input.email,
+      password: input.password,
+      name: input.name,
+    };
 
     axios
-      .post(`http://localhost:8000/api/users/signin/`, { email, password })
+      .post(`http://localhost:8000/api/login/`, user)
       .then((response) => {
-        setUser(response.data.id);
-        console.log(response.data.id);
+        console.log(response.data);
+        window.localStorage.setItem(
+          "user",
+          JSON.stringify({ ...response.data })
+        );
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
+
+    // const loggedInUser = getItemFromLocalStorage("user");
+
+    // const loggedInUser = JSON.parse(window.localStorage.getItem("user"));
+    // console.log(loggedInUser);
+    // if (
+    //   input.email === loggedInUser.email &&
+    //   input.password === loggedInUser.password &&
+    //   input.name === loggedInUser.name
+    // ) {
+    //   navigate("/");
+    // } else {
+    //   alert("wrong email or password");
+    // }
   };
 
   return (
@@ -84,10 +121,8 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              value={email}
+              onChange={changeInput}
+              value={input.email}
               id="email"
               label="Email Address"
               name="email"
@@ -98,14 +133,24 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              value={password}
+              onChange={changeInput}
+              value={input.password}
               name="password"
               label="Password"
               type="password"
               id="password"
+              autoComplete="current-password"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              onChange={changeInput}
+              value={input.name}
+              name="name"
+              label="Name"
+              type="name"
+              id="name"
               autoComplete="current-password"
             />
             <FormControlLabel

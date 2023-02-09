@@ -15,7 +15,7 @@ import SharedLayout from "./pages/SharedLayout";
 
 import axios from "axios";
 import "bootswatch/dist/minty/bootstrap.min.css";
-import { AuthProvider } from "./context/AuthProvider";
+// import { AuthProvider } from "./context/useAuth";
 
 const API_URL = "http://localhost:8000/api/";
 
@@ -149,46 +149,46 @@ function App() {
   };
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            {/* <Route index element={<Home />} />  */}
-            <Route
-              path="signin"
-              element={
-                <SignIn onUpdateUserID={clickToGetUserID} usersID={usersID} />
-              }
-            />
-            <Route
-              path="signupform"
-              element={<SignupForm onUpdateUserID={clickToGetUserID} />}
-            />
-            <Route path="*" element={<Error />} />
-            <Route
-              path="posts"
-              element={
-                <PostList posts={postsData} onClickPost={clickToSelectPost} />
-              }
-            />
-            <Route
-              path="posts/:id"
-              element={
-                <PostDetails posts={postsData} onHandleUpdate={handleUpdate} />
-              }
-            />
-            <Route
-              path="postform"
-              element={
-                <PostForm
-                  usersID={usersID}
-                  users={usersData}
-                  onAddPost={handleAddPost}
-                />
-              }
-            />
-          </Route>
-        </Routes>
-      </AuthProvider>
+      {/* <AuthProvider> */}
+      <Routes>
+        <Route path="/" element={<Home />}>
+          {/* <Route index element={<Home />} />  */}
+          <Route
+            path="signin"
+            element={
+              <SignIn onUpdateUserID={clickToGetUserID} usersID={usersID} />
+            }
+          />
+          <Route
+            path="signupform"
+            element={<SignupForm onUpdateUserID={clickToGetUserID} />}
+          />
+          <Route path="*" element={<Error />} />
+          <Route
+            path="posts"
+            element={
+              <PostList posts={postsData} onClickPost={clickToSelectPost} />
+            }
+          />
+          <Route
+            path="posts/:id"
+            element={
+              <PostDetails posts={postsData} onHandleUpdate={handleUpdate} />
+            }
+          />
+          <Route
+            path="postform"
+            element={
+              <PostForm
+                usersID={usersID}
+                users={usersData}
+                onAddPost={handleAddPost}
+              />
+            }
+          />
+        </Route>
+      </Routes>
+      {/* </AuthProvider> */}
     </BrowserRouter>
   );
 }

@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import API_URL from "../constants/index";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -37,6 +38,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUpForm(props) {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -60,6 +63,7 @@ export default function SignUpForm(props) {
       .catch((error) => {
         console.log(error);
       });
+    navigate("posts");
   };
 
   return (

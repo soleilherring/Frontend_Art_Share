@@ -36,6 +36,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 const Img = styled("img")({
   margin: "auto",
@@ -47,6 +49,13 @@ const Img = styled("img")({
 export default function PostListItem(props) {
   const images = props.images;
   const firstImage = images?.length ? images[0] : {};
+
+  const reservedImage = props.reserved ? (
+    <CheckBoxIcon />
+  ) : (
+    <CheckBoxOutlineBlankIcon />
+  );
+
   return (
     <article className="post-list-item">
       <Paper
@@ -100,7 +109,7 @@ export default function PostListItem(props) {
                   More
                 </Link>
                 <Link className="btn" to={`${props.id}`}>
-                  Reserved
+                  {reservedImage}
                 </Link>
                 {/* <Link to={$props.id} onClick={props.onClickPost()}></Link>
                 <Link to="/" onClick={() => prop.onclick()}></Link> */}
