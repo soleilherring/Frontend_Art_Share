@@ -4,10 +4,11 @@ import Navbar from "../StyledNavbar";
 const Home = () => {
   return (
     <>
-      <Navbar />
-      {/* <section className="section"> */}
-      <Outlet />
-      {/* </section> */}
+      {/* <Navbar /> */}
+      <section className="section">
+        <h2>Welcome to Art Share</h2>
+        {/* <Outlet /> */}
+      </section>
     </>
     // <section className="home">
     //   <h2>Welcome to Art Share</h2>
