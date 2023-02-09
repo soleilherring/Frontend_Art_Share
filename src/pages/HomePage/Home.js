@@ -1,14 +1,13 @@
 import { Link, Outlet } from "react-router-dom";
-import Navbar from "../Navbar";
+import Navbar from "../StyledNavbar";
 
 const Home = () => {
   return (
     <>
       <Navbar />
-      <section className="section">
-        <h2>Homepage</h2>
-        <Outlet />
-      </section>
+      {/* <section className="section"> */}
+      <Outlet />
+      {/* </section> */}
     </>
     // <section className="home">
     //   <h2>Welcome to Art Share</h2>

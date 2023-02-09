@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../Navbar";
+import Navbar from "../StyledNavbar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import PostListItem from "./PostListItem";

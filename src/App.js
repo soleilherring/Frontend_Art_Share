@@ -11,11 +11,13 @@ import Error from "./pages/Error";
 import SignupForm from "./components/SignupForm";
 import PostForm from "./pages/Post/PostForm";
 import SharedLayout from "./pages/SharedLayout";
+import Dashboard from "./pages/Dashboard";
+import RequireAuth from "./components/RequireAuth";
 // import SharedPostsLayout from "./pages/Post/SharedPostsLayout";
 
 import axios from "axios";
 import "bootswatch/dist/minty/bootstrap.min.css";
-// import { AuthProvider } from "./context/useAuth";
+import { AuthProvider } from "./context/useAuth";
 
 const API_URL = "http://localhost:8000/api/";
 
@@ -134,61 +136,72 @@ function App() {
       });
   };
   // add a post to the post list
-  const handleAddPost = (newPost) => {
-    axios
-      .post(`${API_URL}posts/`, newPost)
-      .then((response) => {
-        const newPostList = [...postsData];
-        newPostList.push(response.data);
-        setPosts(newPostList);
-      })
-      .catch((error) => {
-        console.log("Error:", error);
-        alert("Couldn't create a new post. Try again!");
-      });
-  };
+  // const handleAddPost = (newPost) => {
+  //   axios
+  //     .post(`${API_URL}posts/`, newPost)
+  //     .then((response) => {
+  //       const newPostList = [...postsData];
+  //       newPostList.push(response.data);
+  //       setPosts(newPostList);
+  //     })
+  //     .catch((error) => {
+  //       console.log("Error:", error);
+  //       alert("Couldn't create a new post. Try again!");
+  //     });
+  // };
   return (
     <BrowserRouter>
-      {/* <AuthProvider> */}
-      <Routes>
-        <Route path="/" element={<Home />}>
-          {/* <Route index element={<Home />} />  */}
-          <Route
-            path="signin"
-            element={
-              <SignIn onUpdateUserID={clickToGetUserID} usersID={usersID} />
-            }
-          />
-          <Route
-            path="signupform"
-            element={<SignupForm onUpdateUserID={clickToGetUserID} />}
-          />
-          <Route path="*" element={<Error />} />
-          <Route
-            path="posts"
-            element={
-              <PostList posts={postsData} onClickPost={clickToSelectPost} />
-            }
-          />
-          <Route
-            path="posts/:id"
-            element={
-              <PostDetails posts={postsData} onHandleUpdate={handleUpdate} />
-            }
-          />
-          <Route
-            path="postform"
-            element={
-              <PostForm
-                usersID={usersID}
-                users={usersData}
-                onAddPost={handleAddPost}
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<SharedLayout />}>
+            <Route index element={<Home />} />
+            <Route
+              path="signupform"
+              element={<SignupForm onUpdateUserID={clickToGetUserID} />}
+            />
+            <Route path="*" element={<Error />} />
+            <Route
+              path="posts"
+              element={
+                <PostList posts={postsData} onClickPost={clickToSelectPost} />
+              }
+            />
+            <Route
+              path="posts/:id"
+              element={
+                <PostDetails posts={postsData} onHandleUpdate={handleUpdate} />
+              }
+            />
+            <Route
+              path="signin"
+              element={
+                <SignIn onUpdateUserID={clickToGetUserID} usersID={usersID} />
+              }
+            />
+            <Route element={<RequireAuth />}>
+              <Route
+                path="dashboard"
+                element={
+                  <Dashboard
+                    onUpdateUserID={clickToGetUserID}
+                    usersID={usersID}
+                  />
+                }
               />
-            }
-          />
-        </Route>
-      </Routes>
-      {/* </AuthProvider> */}
+              <Route
+                path="postform"
+                element={
+                  <PostForm
+                    usersID={usersID}
+                    users={usersData}
+                    // onAddPost={handleAddPost}
+                  />
+                }
+              />
+            </Route>
+          </Route>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

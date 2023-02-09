@@ -18,7 +18,7 @@ import AuthContext from "../context/useAuth";
 import { useAuth } from "../context/useAuth";
 import { setItemInLocalStorage } from "../useLocalStorage";
 import { getItemFromLocalStorage } from "../useLocalStorage";
-import { useNavigate, useRoutes } from "react-router-dom";
+import { useNavigate, useLocation, useRoutes } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -44,7 +44,6 @@ const theme = createTheme();
 // const { setUser } = useContext(AuthContext);
 // const { login } = useAuth();
 export default function SignIn() {
-  const navigate = useNavigate();
   // const [name, setName] = useState("");
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
@@ -54,6 +53,10 @@ export default function SignIn() {
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
+  const auth = useAuth();
+  const location = useLocation();
 
   const changeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -79,18 +82,9 @@ export default function SignIn() {
       .catch((error) => console.log(error));
 
     // const loggedInUser = getItemFromLocalStorage("user");
-
+    auth.login(user);
     // const loggedInUser = JSON.parse(window.localStorage.getItem("user"));
-    // console.log(loggedInUser);
-    // if (
-    //   input.email === loggedInUser.email &&
-    //   input.password === loggedInUser.password &&
-    //   input.name === loggedInUser.name
-    // ) {
-    //   navigate("/");
-    // } else {
-    //   alert("wrong email or password");
-    // }
+    navigate("/posts", { replace: true });
   };
 
   return (
@@ -166,11 +160,6 @@ export default function SignIn() {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
               <Grid item>
                 <Link href="signupform" variant="body2">
                   {"Don't have an account? Sign Up"}

@@ -86,9 +86,9 @@ export default function PostListItem(props) {
                 <Typography gutterBottom variant="subtitle1" component="div">
                   {props.title}
                 </Typography>
-                <Typography variant="body2" gutterBottom>
+                {/* <Typography variant="body2" gutterBottom>
                   {props.condition}
-                </Typography>
+                </Typography> */}
                 <Typography variant="body2" color="text.secondary">
                   by: {props.user.name}
                 </Typography>

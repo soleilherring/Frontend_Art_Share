@@ -1,11 +1,12 @@
-import { Link, Outlet } from "react-router-dom";
-import Navbar from "./StyledNavbar";
-
-const SharedLayout = () => {
+import react from "react";
+import
+const ProtectedRoutes = () => {
   return (
     <>
       <Navbar />
+      {/* <section className="section"> */}
       <Outlet />
+      {/* </section> */}
     </>
     // <section className="home">
     //   <h2>Welcome to Art Share</h2>
@@ -19,4 +20,4 @@ const SharedLayout = () => {
   );
 };
 
-export default SharedLayout;
+export default ProtectedRoutes;

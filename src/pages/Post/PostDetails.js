@@ -22,14 +22,16 @@ export default function PostDetails({ posts }) {
         {post && (
           <div class="card">
             <div class="card-body">
+              <h2>{post.title}</h2>
               <Carousel className="inner_img">
                 {post.images.map((item) => (
                   <img src={item.image} alt="" className="inner_img" />
                 ))}
               </Carousel>
-              <h4 class="card-title">{post.title}</h4>
-              <h6 class="card-subtitle mb-2 text-muted">{post.user.name}</h6>
-              <p class="card-text">{post.description}</p>
+              <h4 class="card-title">{post.description}</h4>
+              <h6 class="card-subtitle mb-2 text-muted">{post.condition}</h6>
+              <p class="card-text">Pick up in {post.location}</p>
+              <p class="card-text">{post.user.name}</p>
               <a href="#" class="card-link">
                 Message
               </a>
