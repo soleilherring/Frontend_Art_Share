@@ -73,7 +73,7 @@ export default function SignIn() {
     axios
       .post(`http://localhost:8000/api/login/`, user)
       .then((response) => {
-        console.log(response.data);
+        console.log("this person is signed in", response.data);
         // window.localStorage.setItem(
         //   "user",
         //   JSON.stringify()

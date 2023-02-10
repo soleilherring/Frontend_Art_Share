@@ -186,8 +186,8 @@ function App() {
                 path="dashboard"
                 element={
                   <Dashboard
-                    onUpdateUserID={clickToGetUserID}
-                    usersID={usersID}
+                  // onUpdateUserID={clickToGetUserID}
+                  // usersID={usersID}
                   />
                 }
               />
