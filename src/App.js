@@ -106,7 +106,7 @@ function App() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`${API_URL}${id}/`)
+      .delete(`${API_URL}/posts/${id}/`)
       .then(() => {
         const newPost = postsData.filter((p) => {
           return p.id !== id;
@@ -162,7 +162,11 @@ function App() {
             <Route
               path="posts"
               element={
-                <PostList posts={postsData} onClickPost={clickToSelectPost} />
+                <PostList
+                  posts={postsData}
+                  onClickPost={clickToSelectPost}
+                  onDelete={handleDelete}
+                />
               }
             />
             <Route
@@ -177,7 +181,7 @@ function App() {
                 <SignIn onUpdateUserID={clickToGetUserID} usersID={usersID} />
               }
             />
-            <Route element={<RequireAuth />}>
+            <Route path="/" element={<RequireAuth />}>
               <Route
                 path="dashboard"
                 element={

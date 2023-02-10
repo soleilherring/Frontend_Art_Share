@@ -32,6 +32,7 @@ export default function PostList(props) {
           category={post.category}
           onClickPost={props.onClickPost}
           onHandleUpdate={props.onHandleUpdate}
+          onDelete={props.onDelete}
         />
       </ul>
     );

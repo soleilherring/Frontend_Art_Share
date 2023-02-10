@@ -53,61 +53,61 @@ const Navbar = () => {
       >
         All
       </NavLink>
-      {auth.user && (
-        <NavLink
-          to="/postform"
-          style={({ isActive }) => {
-            return {
-              color: isActive ? "CornFlowerBlue" : "grey",
-              textDecoration: "none",
-            };
-          }}
-        >
-          New Post
-        </NavLink>
-      )}
-      {auth.user && (
-        <NavLink
-          to="/dashboard"
-          style={({ isActive }) => {
-            return {
-              color: isActive ? "CornFlowerBlue" : "grey",
-              textDecoration: "none",
-            };
-          }}
-        >
-          Dashboard
-        </NavLink>
-      )}
+      {/* {auth.user && ( */}
+      <NavLink
+        to="/postform"
+        style={({ isActive }) => {
+          return {
+            color: isActive ? "CornFlowerBlue" : "grey",
+            textDecoration: "none",
+          };
+        }}
+      >
+        New Post
+      </NavLink>
+      {/* )} */}
+      {/* {auth.user && ( */}
+      <NavLink
+        to="/dashboard"
+        style={({ isActive }) => {
+          return {
+            color: isActive ? "CornFlowerBlue" : "grey",
+            textDecoration: "none",
+          };
+        }}
+      >
+        Dashboard
+      </NavLink>
+      {/* )} */}
 
-      {!auth.user && (
-        <NavLink
-          to="/signupform"
-          style={({ isActive }) => {
-            return {
-              color: isActive ? "CornFlowerBlue" : "grey",
-              textDecoration: "none",
-            };
-          }}
-        >
-          Sign Up
-        </NavLink>
-      )}
+      {/* {!auth.user && ( */}
+      <NavLink
+        to="/signupform"
+        style={({ isActive }) => {
+          return {
+            color: isActive ? "CornFlowerBlue" : "grey",
+            textDecoration: "none",
+          };
+        }}
+      >
+        Sign Up
+      </NavLink>
+      {/* )} */}
 
       {/* {user && <button onClick={handleClick}>Log Out</button>} */}
-      {!auth.user && (
-        <NavLink
-          to="/signin"
-          style={({ isActive }) => {
-            return {
-              color: isActive ? "CornFlowerBlue" : "grey",
-              textDecoration: "none",
-            };
-          }}
-        >
-          Login
-        </NavLink>
-      )}
+      {/* {!auth.user && ( */}
+      <NavLink
+        to="/signin"
+        style={({ isActive }) => {
+          return {
+            color: isActive ? "CornFlowerBlue" : "grey",
+            textDecoration: "none",
+          };
+        }}
+      >
+        Login
+      </NavLink>
+      {/* )} */}
       {auth.user && <button onClick={handleLogout}>Log Out</button>}
     </nav>
   );
