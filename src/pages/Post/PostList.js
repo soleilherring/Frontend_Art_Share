@@ -5,20 +5,27 @@ import axios from "axios";
 import PostListItem from "./PostListItem";
 import { HeadphonesBatteryOutlined } from "@mui/icons-material";
 
-const API_URL = "http://localhost:8000/api/posts/";
-
-// useEffect(() => {
-//   axios.get(API_URL).then((response) => {
-//     console.log(response.data);
-//   });
-// }, []);
+const API_URL = "http://localhost:8000/api/";
 
 export default function PostList(props) {
-  const posts = props.posts.map((post) => {
+  const [postsData, setPosts] = useState([]);
+  useEffect(() => {
+    const getAllPosts = async () => {
+      try {
+        const response = await axios.get(`${API_URL}posts/`);
+        console.log("this is data", response.data);
+        setPosts(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getAllPosts();
+  }, []);
+
+  const posts = postsData.map((post) => {
     return (
-      <ul className="PostTitles">
+      <ul key={post.id} className="PostTitles">
         <PostListItem
-          key={post.id}
           id={post.id}
           title={post.title}
           user={post.user}

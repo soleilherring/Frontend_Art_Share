@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import "./PostForm.css";
+import { useAuth } from "../../context/useAuth";
 
 const PostForm = (props) => {
   // const [postFormFields, setPostFormFields] = useState({
@@ -20,7 +21,7 @@ const PostForm = (props) => {
   const [images, setImages] = useState([]);
   // console.log(images);
   const [title, setTitle] = useState("");
-  const [user, setUser] = useState(props.usersID);
+  const auth = useAuth();
   const [description, setDescription] = useState("");
   const [condition, setCondition] = useState("");
   const [location, setLocation] = useState("");
@@ -31,7 +32,7 @@ const PostForm = (props) => {
     let formData = new FormData();
 
     formData.append("title", title);
-    formData.append("user_id", user);
+    formData.append("user_id", auth.user.id);
     formData.append("category_list", category);
     formData.append("description", description);
     formData.append("condition", condition);
@@ -61,25 +62,6 @@ const PostForm = (props) => {
     <section className="form">
       <form>
         <fieldset>
-          <label for="exampleInputEmail1" class="form-label mt-4">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-          />
-          <label for="exampleInputPassword1" class="form-label mt-4">
-            Password
-          </label>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            placeholder="Password"
-          />
           <label for="exampleInputEmail1" class="form-label mt-4">
             Title
           </label>

@@ -47,22 +47,22 @@ function App() {
       console.error(error);
     }
   };
-  const refreshPosts = async () => {
-    try {
-      const posts = await getAllPosts();
-      console.log("this will set all posts");
-      setPosts(posts);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const refreshPosts = async () => {
+  //   try {
+  //     const posts = await getAllPosts();
+  //     console.log("this will set all posts");
+  //     setPosts(posts);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const [usersData, setUsers] = useState([]);
   const [usersID, setUserID] = useState(null);
   const [reviewsData, setReviews] = useState([]);
   const [categoriesData, setCategories] = useState([]);
   const [locations, setLocations] = useState([]);
-  const [postsData, setPosts] = useState([]);
+
   const [selectedPost, setSelectedPost] = useState({
     id: null,
     title: "",
@@ -77,9 +77,9 @@ function App() {
     category: [],
   });
 
-  useEffect(() => {
-    refreshPosts();
-  }, []);
+  // useEffect(() => {
+  //   refreshPosts();
+  // }, []);
 
   useEffect(() => {
     getAllUsers();
@@ -89,52 +89,38 @@ function App() {
   // onclick to find post, setselected post, then it will redirect to post detail.
   // post list, iterate through post list item, which click on post item component, store id in state --> navigate
 
-  const clickToSelectPost = (id) => {
-    for (const post of postsData) {
-      console.log(post.id);
-      if (post.id === id) {
-        console.log("this is the post id", post.id);
-        setSelectedPost(post);
-      }
-    }
-  };
+  // const clickToSelectPost = (id) => {
+  //   for (const post of postsData) {
+  //     console.log(post.id);
+  //     if (post.id === id) {
+  //       console.log("this is the post id", post.id);
+  //       setSelectedPost(post);
+  //     }
+  //   }
+  // };
 
   // user ID
   const clickToGetUserID = (id) => {
     setUserID(id);
   };
 
-  const handleDelete = (id) => {
-    axios
-      .delete(`${API_URL}/posts/${id}/`)
-      .then(() => {
-        const newPost = postsData.filter((p) => {
-          return p.id !== id;
-        });
-        setPosts(newPost);
-      })
-      .catch(() => {
-        alert("Something went wrong");
-      });
-  };
-
-  const handleUpdate = async (id, value) => {
-    return axios
-      .patch(`${API_URL}${id}/`, value)
-      .then((res) => {
-        const { data } = res;
-        const newPost = postsData.map((p) => {
-          if (p.id === id) {
-            return data;
-          }
-          return p;
-        });
-        setPosts(newPost);
-      })
-      .catch(() => {
-        alert("Something went wrong");
-      });
-  };
+  // const handleUpdate = async (id, value) => {
+  //   return axios
+  //     .patch(`${API_URL}${id}/`, value)
+  //     .then((res) => {
+  //       const { data } = res;
+  //       const newPost = postsData.map((p) => {
+  //         if (p.id === id) {
+  //           return data;
+  //         }
+  //         return p;
+  //       });
+  //       setPosts(newPost);
+  //     })
+  //     .catch(() => {
+  //       alert("Something went wrong");
+  //     });
+  // };
   // add a post to the post list
   // const handleAddPost = (newPost) => {
   //   axios
@@ -159,22 +145,8 @@ function App() {
               path="signupform"
               element={<SignupForm onUpdateUserID={clickToGetUserID} />}
             />
-            <Route
-              path="posts"
-              element={
-                <PostList
-                  posts={postsData}
-                  onClickPost={clickToSelectPost}
-                  onDelete={handleDelete}
-                />
-              }
-            />
-            <Route
-              path="posts/:id"
-              element={
-                <PostDetails posts={postsData} onHandleUpdate={handleUpdate} />
-              }
-            />
+            <Route path="posts" element={<PostList />} />
+            <Route path="posts/:id" element={<PostDetails />} />
             <Route
               path="signin"
               element={

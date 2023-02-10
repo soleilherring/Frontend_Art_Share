@@ -9,13 +9,33 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Paper";
 import Carousel from "react-material-ui-carousel";
 import "./PostDetails.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function PostDetails({ posts }) {
   const { id } = useParams();
+
+  const [post, setPost] = useState(null);
+  const API_URL = "http://localhost:8000/api/";
+
+  useEffect(() => {
+    const getPost = async () => {
+      try {
+        const response = await axios.get(`${API_URL}posts/${id}`);
+        console.log("this is data", response.data);
+        setPost(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getPost();
+  }, []);
   // const images = posts.images;
   // const firstImage = images?.length ? images[0] : {};
-  const post = posts.find((post) => post.id.toString() === id);
   console.log("it's a post & id", post, id);
+  if (!post) {
+    return <h4>Loading...</h4>;
+  }
   return (
     <main className="PostPage">
       <article className="post">

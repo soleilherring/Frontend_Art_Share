@@ -10,6 +10,8 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -23,6 +25,7 @@ export const AuthProvider = ({ children }) => {
     } else {
       navigate(location.pathname);
     }
+    setLoading(false);
   }, []);
 
   const login = async (data) => {
@@ -44,8 +47,9 @@ export const AuthProvider = ({ children }) => {
       user,
       login,
       logout,
+      loading,
     }),
-    [user]
+    [user, loading]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
