@@ -46,19 +46,27 @@ export default function Dashboard() {
 
   return (
     <section className="section">
-      <h4>{auth.user ? `Welcome, ${auth.user.name} ${auth.user.id}` : ""}</h4>
+      <h4>{auth.user ? `Welcome, ${auth.user.name}` : ""}</h4>
       <div>
         {auth.user && (
           <button onClick={() => seeAllMyPosts()}>See all my posts</button>
         )}
         {userInfo && (
           <div>
-            This is the user info array:{" "}
             {userInfo.map((post) => {
               return (
-                <Card sx={{ maxWidth: 500 }}>
+                <Card
+                  sx={{
+                    // p: 2,
+                    margin: "auto",
+                    maxWidth: 400,
+                    flexGrow: 1,
+                    backgroundColor: (theme) =>
+                      theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+                  }}
+                >
                   <CardMedia
-                    sx={{ height: 500 }}
+                    sx={{ height: 400 }}
                     image={post.images[0].image}
                     title="post image"
                   />

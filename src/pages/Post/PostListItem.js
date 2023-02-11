@@ -68,7 +68,7 @@ export default function PostListItem(props) {
             theme.palette.mode === "dark" ? "#1A2027" : "#fff",
         }}
       >
-        <Grid container spacing={2}>
+        <Grid container spacing={4}>
           <Grid item>
             <ButtonBase sx={{ width: 128, height: 128 }}>
               <Img
@@ -108,9 +108,7 @@ export default function PostListItem(props) {
                 <Link className="btn" to={`${props.id}`}>
                   More
                 </Link>
-                <Link className="btn" to={`${props.id}`}>
-                  {reservedImage}
-                </Link>
+                <span>{reservedImage}</span>
                 {/* <Link to={$props.id} onClick={props.onClickPost()}></Link>
                 <Link to="/" onClick={() => prop.onclick()}></Link> */}
               </Typography>
