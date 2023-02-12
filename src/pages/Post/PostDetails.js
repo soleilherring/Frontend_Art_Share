@@ -52,12 +52,8 @@ export default function PostDetails({ posts }) {
               <h6 class="card-subtitle mb-2 text-muted">{post.condition}</h6>
               <p class="card-text">Pick up in {post.location}</p>
               <p class="card-text">{post.user.name}</p>
-              <a href="#" class="card-link">
-                Message
-              </a>
-              <a href="#" class="card-link">
-                Likes
-              </a>
+              <Button variant="text">Message</Button>
+              <Button variant="text">Likes</Button>
             </div>
           </div>
         )}

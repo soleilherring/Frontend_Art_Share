@@ -1,38 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import "./PostForm.css";
 import { useAuth } from "../../context/useAuth";
 
 const PostForm = (props) => {
-  // const [postFormFields, setPostFormFields] = useState({
-  //   id: null,
-  //   title: "",
-  //   user: "",
-  //   images: [],
-  //   description: "",
-  //   condition: "",
-  //   location: "",
-  //   date: "",
-  //   likes: "",
-  //   reserved: null,
-  //   category: [],
-  // })
-  const [images, setImages] = useState([]);
-  // console.log(images);
-  const [title, setTitle] = useState("");
   const auth = useAuth();
+  const [images, setImages] = useState([]);
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [condition, setCondition] = useState("");
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState([]);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let formData = new FormData();
 
     formData.append("title", title);
-    formData.append("user_id", auth.user.id);
+    formData.append("user_id", auth?.user?.id);
     formData.append("category_list", category);
     formData.append("description", description);
     formData.append("condition", condition);
@@ -56,10 +43,23 @@ const PostForm = (props) => {
       .catch((error) => {
         console.log(error);
       });
+    navigate("/posts");
+  };
+
+  const removeSelectedImage = () => {
+    setImages();
   };
 
   return (
-    <section className="form">
+    <section
+      className="form"
+      style={{
+        marginTop: 8,
+        display: "flex",
+        justifyContent: "center",
+        // alignItems: "center",
+      }}
+    >
       <form>
         <fieldset>
           <label for="exampleInputEmail1" class="form-label mt-4">
@@ -143,17 +143,20 @@ const PostForm = (props) => {
             <option value="Calligraphy">Calligraphy</option>
             <option value="Textiles">Textiles</option>
           </select>
-
-          {Array.from(images).map((item) => {
-            return (
-              <span>
+          <div className="image-section">
+            {Array.from(images).map((item) => {
+              return (
                 <img
-                  height={300}
+                  style={{
+                    display: "flex",
+                    height: 300,
+                    objectFit: "scale-down",
+                  }}
                   src={item ? URL.createObjectURL(item) : null}
                 />
-              </span>
-            );
-          })}
+              );
+            })}
+          </div>
           <input
             multiple
             type="file"
@@ -161,7 +164,10 @@ const PostForm = (props) => {
               setImages(e.target.files);
             }}
           />
-          <button onClick={handleSubmit}> Submit </button>
+          <button onClick={handleSubmit} class="btn btn-secondary my-2 my-sm-0">
+            {" "}
+            Submit{" "}
+          </button>
         </fieldset>
       </form>
       <Link to="/posts">See All Posts</Link>
