@@ -9,6 +9,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useState } from "react";
+import reserved from "../images/reserved.png";
+import available from "../images/available.png";
 
 export default function Dashboard() {
   const [userInfo, setUserInfo] = useState("");
@@ -22,6 +24,24 @@ export default function Dashboard() {
       .then(() => {
         const newInfo = userInfo.filter((p) => {
           return p.id !== id;
+        });
+        setUserInfo(newInfo);
+      })
+      .catch(() => {
+        alert("Something went wrong");
+      });
+  };
+
+  const handleUpdate = async (id, value) => {
+    return axios
+      .patch(`${API_URL}posts/${id}/`, value)
+      .then((res) => {
+        const { data } = res;
+        const newInfo = userInfo.map((p) => {
+          if (p.id === id) {
+            return data;
+          }
+          return p;
         });
         setUserInfo(newInfo);
       })
@@ -54,6 +74,11 @@ export default function Dashboard() {
         {userInfo && (
           <div>
             {userInfo.map((post) => {
+              const reservedImage = post.reserved ? (
+                <img style={{ height: 40 }} src={reserved} />
+              ) : (
+                <img style={{ height: 40 }} src={available} />
+              );
               return (
                 <Card
                   sx={{
@@ -79,8 +104,15 @@ export default function Dashboard() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">Reserved</Button>
-                    <Button size="small">Edit</Button>
+                    {/* <Button size="small">Reserved</Button> */}
+                    <Button
+                      size="small"
+                      onClick={() => {
+                        handleUpdate(post.id, { reserved: !post.reserved });
+                      }}
+                    >
+                      {reservedImage}
+                    </Button>
                     <Button
                       size="small"
                       onClick={() => {

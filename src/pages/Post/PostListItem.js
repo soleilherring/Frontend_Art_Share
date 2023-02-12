@@ -38,6 +38,8 @@ import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import reserved from "../../images/reserved.png";
+import available from "../../images/available.png";
 
 const Img = styled("img")({
   margin: "auto",
@@ -51,9 +53,9 @@ export default function PostListItem(props) {
   const firstImage = images?.length ? images[0] : {};
 
   const reservedImage = props.reserved ? (
-    <CheckBoxIcon />
+    <img style={{ height: 40 }} src={reserved} />
   ) : (
-    <CheckBoxOutlineBlankIcon />
+    <img style={{ height: 40 }} src={available} />
   );
 
   return (
