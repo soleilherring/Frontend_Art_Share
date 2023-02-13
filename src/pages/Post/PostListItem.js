@@ -85,7 +85,12 @@ export default function PostListItem(props) {
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
-                <Typography gutterBottom variant="subtitle1" component="div">
+                <Typography
+                  gutterBottom
+                  variant="subtitle1"
+                  component="div"
+                  fontWeight={600}
+                >
                   {props.title}
                 </Typography>
                 {/* <Typography variant="body2" gutterBottom>
@@ -107,7 +112,11 @@ export default function PostListItem(props) {
             </Grid>
             <Grid item>
               <Typography variant="subtitle1" component="div">
-                <Link className="btn" to={`${props.id}`}>
+                <Link
+                  className="btn"
+
+                  to={`${props.id}`}
+                >
                   More
                 </Link>
                 <span>{reservedImage}</span>

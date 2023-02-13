@@ -169,8 +169,10 @@ const PostForm = (props) => {
             Submit{" "}
           </button>
         </fieldset>
+        <Link class="btn btn-light" to="/posts">
+          See All Posts
+        </Link>
       </form>
-      <Link to="/posts">See All Posts</Link>
     </section>
   );
 };

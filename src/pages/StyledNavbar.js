@@ -218,12 +218,6 @@ const Navbar = () => {
               {auth.user && (
                 <button
                   class="btn btn-secondary my-2 my-sm-0"
-                  tyle={({ isActive }) => {
-                    return {
-                      color: isActive ? "CornFlowerBlue" : "grey",
-                      textDecoration: "none",
-                    };
-                  }}
                   onClick={handleLogout}
                 >
                   Log Out
