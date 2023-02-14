@@ -151,14 +151,14 @@ export default function PostList(props) {
           <ToggleButton
             style={{ textTransform: "none" }}
             onClick={() => getAllPosts()}
-            value=""
+            value="all"
           >
             All
           </ToggleButton>
           <ToggleButton
             style={{ textTransform: "none" }}
-            // onClick={() => handleFilter(1)}
-            value="1"
+            onClick={() => handleFilter(1)}
+            value="Painting"
           >
             Painting
           </ToggleButton>
