@@ -1,27 +1,27 @@
 .post {
   display: flex;
   justify-content: center;
-  height: 300vh;
-  /* width: 500px; */
+  /* height: 300vh; */
 }
 
 .inner_img {
-  /* display: flex;
-  flex-direction: column; */
   height: 300px;
-  /* width: auto; */
 }
 
 .card {
-  width: 100%;
+  /* display: flex;
+  justify-content: center; */
+  width: 30rem;
 }
 
 .card-body {
   display: flex;
   flex-direction: column;
   text-align: center;
+  max-width: 40rem;
 }
 
 .PostPage {
-  /*  */
+  display: flex;
+  justify-content: center;
 }
