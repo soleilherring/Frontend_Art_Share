@@ -59,74 +59,72 @@ export default function PostListItem(props) {
   );
 
   return (
-    <article className="post-list-item">
-      <Paper
-        sx={{
-          p: 2,
-          margin: "auto",
-          maxWidth: 500,
-          flexGrow: 1,
-          backgroundColor: (theme) =>
-            theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-        }}
-      >
-        <Grid container spacing={4}>
-          <Grid item>
-            <ButtonBase sx={{ width: 128, height: 128 }}>
-              <Img
-                alt="complex"
-                src={
-                  firstImage?.image ??
-                  "https://res.cloudinary.com/dyzttpr3i/image/upload/v1/media/images/pencil_rhtkx2"
-                }
-              />
-            </ButtonBase>
-          </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs>
-                <Typography
-                  gutterBottom
-                  variant="subtitle1"
-                  component="div"
-                  fontWeight={600}
-                >
-                  {props.title}
-                </Typography>
-                {/* <Typography variant="body2" gutterBottom>
-                  {props.condition}
-                </Typography> */}
-                <Typography variant="body2" color="text.secondary">
-                  by: {props.user.name}
-                </Typography>
+    <>
+      <article className="post-list-item">
+        <Paper
+          sx={{
+            p: 2,
+            margin: "auto",
+            maxWidth: 500,
+            flexGrow: 1,
+            backgroundColor: (theme) =>
+              theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+          }}
+        >
+          <Grid container spacing={4}>
+            <Grid item>
+              <ButtonBase sx={{ width: 128, height: 128 }}>
+                <Img
+                  alt="complex"
+                  src={
+                    firstImage?.image ??
+                    "https://res.cloudinary.com/dyzttpr3i/image/upload/v1/media/images/pencil_rhtkx2"
+                  }
+                />
+              </ButtonBase>
+            </Grid>
+            <Grid item xs={12} sm container>
+              <Grid item xs container direction="column" spacing={2}>
+                <Grid item xs>
+                  <Typography
+                    gutterBottom
+                    variant="subtitle1"
+                    component="div"
+                    fontWeight={600}
+                  >
+                    {props.title}
+                  </Typography>
+                  {/* <Typography variant="body2" gutterBottom>
+                    {props.condition}
+                  </Typography> */}
+                  <Typography variant="body2" color="text.secondary">
+                    by: {props.user.name}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography sx={{ cursor: "pointer" }} variant="body2">
+                    {props.location}
+                  </Typography>
+                  <Typography sx={{ cursor: "pointer" }} variant="body2">
+                    {props.date}
+                    {/* {props.date().toLocaleDateString()} */}
+                  </Typography>
+                </Grid>
               </Grid>
               <Grid item>
-                <Typography sx={{ cursor: "pointer" }} variant="body2">
-                  {props.location}
-                </Typography>
-                <Typography sx={{ cursor: "pointer" }} variant="body2">
-                  {props.date}
-                  {/* {props.date().toLocaleDateString()} */}
+                <Typography variant="subtitle1" component="div">
+                  <Link className="btn" to={`${props.id}`}>
+                    More
+                  </Link>
+                  <span>{reservedImage}</span>
+                  {/* <Link to={$props.id} onClick={props.onClickPost()}></Link>
+                  <Link to="/" onClick={() => prop.onclick()}></Link> */}
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item>
-              <Typography variant="subtitle1" component="div">
-                <Link
-                  className="btn"
-
-                  to={`${props.id}`}
-                >
-                  More
-                </Link>
-                <span>{reservedImage}</span>
-                {/* <Link to={$props.id} onClick={props.onClickPost()}></Link>
-                <Link to="/" onClick={() => prop.onclick()}></Link> */}
-              </Typography>
-            </Grid>
           </Grid>
-        </Grid>
-      </Paper>
-    </article>
+        </Paper>
+      </article>
+    </>
   );
 }

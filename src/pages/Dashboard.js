@@ -11,6 +11,7 @@ import axios from "axios";
 import { useState } from "react";
 import reserved from "../images/reserved.png";
 import available from "../images/available.png";
+import Grid from "@mui/material/Grid";
 
 export default function Dashboard() {
   const [userInfo, setUserInfo] = useState("");
@@ -57,9 +58,9 @@ export default function Dashboard() {
       .then((response) => {
         // this is an array
         setUserInfo(response.data);
-        console.log("all data", response.data);
-        console.log("one data", response.data[0]);
-        console.log("one data", response.data[0].title);
+        // console.log("all data", response.data);
+        // console.log("one data", response.data[0]);
+        // console.log("one data", response.data[0].title);
       })
       .catch((error) => console.log(error));
   };
@@ -80,49 +81,56 @@ export default function Dashboard() {
                 <img style={{ height: 40 }} src={available} />
               );
               return (
-                <Card
-                  sx={{
-                    // p: 2,
-                    margin: "auto",
-                    maxWidth: 400,
-                    flexGrow: 1,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-                  }}
+                <Grid
+                  container
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
                 >
-                  <CardMedia
-                    sx={{ height: 400 }}
-                    image={post.images[0].image}
-                    title="post image"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {post.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {post.description}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    {/* <Button size="small">Reserved</Button> */}
-                    <Button
-                      size="small"
-                      onClick={() => {
-                        handleUpdate(post.id, { reserved: !post.reserved });
-                      }}
-                    >
-                      {reservedImage}
-                    </Button>
-                    <Button
-                      size="small"
-                      onClick={() => {
-                        handleDelete(post.id);
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </CardActions>
-                </Card>
+                  <Card
+                    sx={{
+                      // p: 2,
+                      margin: "auto",
+                      maxWidth: 300,
+                      flexGrow: 1,
+                      backgroundColor: (theme) =>
+                        theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+                    }}
+                  >
+                    <CardMedia
+                      sx={{ height: 200 }}
+                      image={post.images[0].image}
+                      title="post image"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {post.title}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {post.description}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      {/* <Button size="small">Reserved</Button> */}
+                      <Button
+                        size="small"
+                        onClick={() => {
+                          handleUpdate(post.id, { reserved: !post.reserved });
+                        }}
+                      >
+                        {reservedImage}
+                      </Button>
+                      <Button
+                        size="small"
+                        onClick={() => {
+                          handleDelete(post.id);
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
               );
             })}
           </div>

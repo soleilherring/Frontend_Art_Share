@@ -115,8 +115,8 @@ const Navbar = () => {
   // export default Navbar;
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container-fluid">
         <NavLink
           className="navbar-brand"
           to="/"
@@ -130,7 +130,7 @@ const Navbar = () => {
           Art Share
         </NavLink>
         {/* <button
-          class="navbar-toggler"
+          className ="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarColor03"
@@ -138,11 +138,11 @@ const Navbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className ="navbar-toggler-icon"></span>
         </button> */}
-        <div class="collapse navbar-collapse" id="navbarColor03">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
+        <div className="collapse navbar-collapse" id="navbarColor03">
+          <ul className="navbar-nav me-auto">
+            <li className="nav-item">
               <NavLink
                 className="nav-link"
                 to="/"
@@ -156,7 +156,7 @@ const Navbar = () => {
                 Home
               </NavLink>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <NavLink
                 className="nav-link"
                 to="/posts"
@@ -170,7 +170,7 @@ const Navbar = () => {
                 All
               </NavLink>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <NavLink
                 className="nav-link"
                 to="/dashboard"
@@ -184,7 +184,7 @@ const Navbar = () => {
                 Dashboard
               </NavLink>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <NavLink
                 className="nav-link"
                 to="/postform"
@@ -198,7 +198,7 @@ const Navbar = () => {
                 New Post
               </NavLink>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               {!auth.user && (
                 <NavLink
                   className="nav-link"
@@ -214,10 +214,10 @@ const Navbar = () => {
                 </NavLink>
               )}
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               {auth.user && (
                 <button
-                  class="btn btn-secondary my-2 my-sm-0"
+                  className="btn btn-secondary my-2 my-sm-0"
                   onClick={handleLogout}
                 >
                   Log Out
@@ -225,13 +225,13 @@ const Navbar = () => {
               )}
             </li>
           </ul>
-          <form class="d-flex">
+          <form className="d-flex">
             <input
-              class="form-control me-sm-2"
+              className="form-control me-sm-2"
               type="search"
               placeholder="Search"
             />
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+            <button className="btn btn-secondary my-2 my-sm-0" type="submit">
               Search
             </button>
           </form>
