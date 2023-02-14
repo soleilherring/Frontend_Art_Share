@@ -52,8 +52,26 @@ export default function PostDetails({ posts }) {
               <h6 class="card-subtitle mb-2 text-muted">{post.condition}</h6>
               <p class="card-text">Pick up in {post.location}</p>
               <p class="card-text">{post.user.name}</p>
-              <Button variant="text">Message</Button>
-              <Button variant="text">Likes</Button>
+              <div class="btn-group">
+                <button
+                  type="button"
+                  className="btn btn-light col-3 me-2 my-2 my-sm-0"
+                >
+                  Message
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-light col-3 me-2 my-2 my-sm-0"
+                >
+                  5 ❤️'s
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-light col-3 me-2 my-2 my-sm-0"
+                >
+                  Comments
+                </button>
+              </div>
             </div>
           </div>
         )}

@@ -70,7 +70,12 @@ export default function Dashboard() {
       <h4>{auth.user ? `Welcome, ${auth.user.name}` : ""}</h4>
       <div>
         {auth.user && (
-          <button onClick={() => seeAllMyPosts()}>See all my posts</button>
+          <button
+            className="btn btn-light my-2 my-sm-0"
+            onClick={() => seeAllMyPosts()}
+          >
+            See all my posts
+          </button>
         )}
         {userInfo && (
           <div>
