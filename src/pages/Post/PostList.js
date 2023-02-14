@@ -9,22 +9,50 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import Box from "@mui/material/Box";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import reserved from "../../images/reserved.png";
+import available from "../../images/available.png";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const API_URL = "http://localhost:8000/api/";
 
 export default function PostList(props) {
   const [postsData, setPosts] = useState([]);
-  const [alignment, setAlignment] = useState("web");
+  const [category, setCategory] = useState("all");
+  const [reserved, setReserved] = useState(false);
 
-  const handleChange = (event, newAlignment) => {
-    setAlignment(newAlignment);
+  const handleFilter = (category, reserved) => {
+    getAllPosts(category, reserved);
   };
 
-  const getAllPosts = async (id = null) => {
+  const handleCategoryChange = (event, category) => {
+    if (category !== null) {
+      setCategory(category);
+    }
+    handleFilter(category, reserved);
+  };
+
+  const handleResChange = (event) => {
+    const newReserved = event.target.value;
+    setReserved(newReserved);
+    handleFilter(category, newReserved);
+  };
+
+  const getAllPosts = async (category = null, reserved = null) => {
     try {
-      let endpoint = `${API_URL}posts/`;
-      if (id) {
-        endpoint += `?category=${id}`;
+      let endpoint = `${API_URL}`;
+      if (category) {
+        endpoint += `posts?category=${category}`;
+      }
+      if (reserved !== null) {
+        const reservedVal = reserved ? "true" : "false";
+        if (category) {
+          endpoint += `&reserved=${reservedVal}`;
+        } else {
+          endpoint += `?reserved=${reservedVal}`;
+        }
       }
       const response = await axios.get(endpoint);
       console.log("this is data", response.data);
@@ -37,10 +65,6 @@ export default function PostList(props) {
   useEffect(() => {
     getAllPosts();
   }, []);
-
-  const handleFilter = (id) => {
-    getAllPosts(id);
-  };
 
   // useEffect(() => {
   //   const getAllPosts = async () => {
@@ -75,6 +99,11 @@ export default function PostList(props) {
   //   setPosts(updatedItems);
   // };
   const posts = postsData.map((post) => {
+    const reservedImage = post.reserved ? (
+      <img style={{ height: 40 }} src={reserved} />
+    ) : (
+      <img style={{ height: 40 }} src={available} />
+    );
     return (
       <>
         <ul key={post.id} className="PostTitles">
@@ -111,98 +140,25 @@ export default function PostList(props) {
               m: 1,
             },
           }}
-        >
-          {/* <ButtonGroup
-            vcolor="primary"
-            value={alignment}
-            exclusive
-            onChange={handleChange}
-            // aria-label="Platform"
-            ariant="outlined"
-            aria-label="outlined button group"
-          >
-            <Button
-              style={{ textTransform: "none" }}
-              onClick={() => getAllPosts()}
-            >
-              All
-            </Button>
-            <Button
-              style={{ textTransform: "none" }}
-              onClick={() => handleFilter(1)}
-            >
-              Painting
-            </Button>
-            <Button
-              style={{ textTransform: "none" }}
-              onClick={() => handleFilter(2)}
-            >
-              Ceramics
-            </Button>
-            <Button
-              style={{ textTransform: "none" }}
-              onClick={() => handleFilter(3)}
-            >
-              Yarn and Needlework
-            </Button>
-            <Button
-              style={{ textTransform: "none" }}
-              onClick={() => handleFilter(4)}
-            >
-              Illustration and Drawing
-            </Button>
-            <Button
-              style={{ textTransform: "none" }}
-              onClick={() => handleFilter(5)}
-            >
-              {" "}
-              Sculpture
-            </Button>
-            <Button
-              style={{ textTransform: "none" }}
-              onClick={() => handleFilter(6)}
-            >
-              Printmaking
-            </Button>
-            <Button
-              style={{ textTransform: "none" }}
-              onClick={() => handleFilter(7)}
-            >
-              Photography
-            </Button>
-            <Button
-              style={{ textTransform: "none" }}
-              onClick={() => handleFilter(8)}
-            >
-              Calligraphy
-            </Button>
-            <Button
-              style={{ textTransform: "none" }}
-              onClick={() => handleFilter(9)}
-            >
-              {" "}
-              Textiles
-            </Button>
-          </ButtonGroup> */}
-        </Box>
+        ></Box>
         <ToggleButtonGroup
           color="primary"
-          value={alignment}
+          value={category}
           exclusive
-          onChange={handleChange}
+          onChange={handleCategoryChange}
           aria-label="Platform"
         >
           <ToggleButton
             style={{ textTransform: "none" }}
             onClick={() => getAllPosts()}
-            value="all"
+            value=""
           >
             All
           </ToggleButton>
           <ToggleButton
             style={{ textTransform: "none" }}
-            onClick={() => handleFilter(1)}
-            value="Painting"
+            // onClick={() => handleFilter(1)}
+            value="1"
           >
             Painting
           </ToggleButton>
@@ -263,61 +219,22 @@ export default function PostList(props) {
             Textiles
           </ToggleButton>
         </ToggleButtonGroup>
-
-        {/* OLDDDD */}
-
-        {/* <div
-          class="btn-group"
-          role="group"
-          aria-label="Button group with nested dropdown"
-        >
-          <button type="button" class="btn btn-primary">
-            All
-          </button>
-          <div class="btn-group" role="group">
-            <button
-              id="btnGroupDrop1"
-              type="button"
-              class="btn btn-primary dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            ></button>
-            <div
-              class="dropdown-menu"
-              aria-labelledby="btnGroupDrop1"
-              // style={{''}}
+        {/* ################################## */}
+        <Box sx={{ minWidth: 120 }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Filter</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={reserved}
+              label="Age"
+              onChange={handleResChange}
             >
-              <a class="dropdown-item" href="#">
-                Painting
-              </a>
-              <a class="dropdown-item" href="#">
-                Ceramics
-              </a>
-              <a class="dropdown-item" href="#">
-                Yarn and Needlework
-              </a>
-              <a class="dropdown-item" href="#">
-                Illustration and Drawing
-              </a>
-              <a class="dropdown-item" href="#">
-                Sculpture
-              </a>
-              <a class="dropdown-item" href="#">
-                Printmaking
-              </a>
-              <a class="dropdown-item" href="#">
-                Photography
-              </a>
-              <a class="dropdown-item" href="#">
-                Calligraphy
-              </a>
-              <a class="dropdown-item" href="#">
-                Textiles
-              </a>
-            </div>
-          </div>
-        </div> */}
+              <MenuItem value={false}>Available</MenuItem>
+              <MenuItem value={true}>Reserved</MenuItem>{" "}
+            </Select>
+          </FormControl>
+        </Box>
         <li className="Posts-Box">{posts}</li>
         {/* <Outlet /> */}
       </div>
