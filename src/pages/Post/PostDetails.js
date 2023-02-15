@@ -12,7 +12,7 @@ import "./PostDetails.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function PostDetails({ posts }) {
+export default function PostDetails() {
   const { id } = useParams();
 
   const [post, setPost] = useState(null);
@@ -45,7 +45,12 @@ export default function PostDetails({ posts }) {
               <h2>{post.title}</h2>
               <Carousel className="inner_img">
                 {post.images.map((item) => (
-                  <img src={item.image} alt="" className="inner_img" />
+                  <img
+                    key={item.id}
+                    src={item.image}
+                    alt=""
+                    className="inner_img"
+                  />
                 ))}
               </Carousel>
               <h4 class="card-title">{post.description}</h4>
@@ -75,7 +80,7 @@ export default function PostDetails({ posts }) {
             </div>
           </div>
         )}
-        {!post && posts.length !== 0 && (
+        {!post && (
           <>
             <h2>Post Not Found</h2>
             <p>Well, that's disappointing.</p>

@@ -39,11 +39,11 @@ const PostForm = (props) => {
       })
       .then((response) => {
         console.log(response);
+        navigate("/posts");
       })
       .catch((error) => {
         console.log(error);
       });
-    navigate("/posts");
   };
 
   const removeSelectedImage = () => {

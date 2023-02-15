@@ -81,9 +81,19 @@ export default function Dashboard() {
           <div>
             {userInfo.map((post) => {
               const reservedImage = post.reserved ? (
-                <img style={{ height: 40 }} src={reserved} />
+                <img
+                  key={post.id}
+                  alt="reserved icon"
+                  style={{ height: 40 }}
+                  src={reserved}
+                />
               ) : (
-                <img style={{ height: 40 }} src={available} />
+                <img
+                  key={post.id}
+                  alt="avialable icon"
+                  style={{ height: 40 }}
+                  src={available}
+                />
               );
               return (
                 <Grid
