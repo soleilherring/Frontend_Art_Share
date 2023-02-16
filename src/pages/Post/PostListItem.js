@@ -53,9 +53,9 @@ export default function PostListItem(props) {
   const firstImage = images?.length ? images[0] : {};
 
   const reservedImage = props.reserved ? (
-    <img style={{ height: 40 }} src={reserved} />
+    <img alt="reserved icon" style={{ height: 40 }} src={reserved} />
   ) : (
-    <img style={{ height: 40 }} src={available} />
+    <img alt="reserved icon" style={{ height: 40 }} src={available} />
   );
 
   return (
